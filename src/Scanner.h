@@ -5,6 +5,7 @@
 #include "Token.h"
 #include <string>
 #include <vector>
+#include <map>
 
 class Scanner {
     public:
@@ -23,7 +24,34 @@ class Scanner {
         char advance();
         void addToken(TokenType _type);
         void addToken(TokenType _type,std::string _literal); //TODO UPdate to object
+        bool match(char _expected);
+        char peek();
+        void string();
+        bool isDigit(char c);
+        void number();
+        char peekNext();
+        void identifier();
+        bool isAlpha(char c);
+        bool isAlphaNumeric(char c);
 
+        const std::map<std::string,TokenType> keywords = {
+            {"and",AND},
+            {"class",CLASS},
+            {"else",ELSE},
+            {"false",FALSE},
+            {"for",FOR},
+            {"fun",FUN},
+            {"if",IF},
+            {"nil",NIL},
+            {"or",OR},
+            {"print",PRINT},
+            {"return",RETURN},
+            {"super",SUPER},
+            {"this",THIS},
+            {"true",TRUE},
+            {"var",VAR},
+            {"while",WHILE}
+        };
 
 };
 

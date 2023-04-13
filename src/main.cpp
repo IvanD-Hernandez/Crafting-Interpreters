@@ -2,13 +2,14 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "Error.cpp"
 
 void runFile(std::string path);
 void runPrompt();
 void run(std::string* pByteString);
 void error(int line,std::string message);
 void report(int line,std::string where, std::string message);
-static bool hadError = false;
+Error ErrorReport;
 
 int main(int argc, char* argv[]){
 
@@ -50,7 +51,7 @@ void runFile(std::string path){
         }
         run(pByteString);
 
-        if(hadError){
+        if(ErrorReport.hadError){
             exit(65);
         }
 
@@ -69,7 +70,7 @@ void runPrompt(){
             break;
         }
         run(&line);
-        hadError = false;
+        ErrorReport.hadError = false;
 
         line.clear();
     }
@@ -83,14 +84,3 @@ void run(std::string* pByteString){
 
 }
 
-void error(int line,std::string message){
-
-    report(line,"",message);
-
-}
-
-void report(int line,std::string where, std::string message){
-
-    std::cout << "[line " << line << "] Error" << where << ": " << message << std::endl;
-    hadError= true;
-}
