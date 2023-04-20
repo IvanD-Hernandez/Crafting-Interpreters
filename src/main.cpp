@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include "Error.cpp"
+#include "Scanner.h"
 
 void runFile(std::string path);
 void runPrompt();
@@ -78,6 +79,9 @@ void runPrompt(){
 }
 
 void run(std::string* pByteString){
+
+    Scanner scan(*pByteString);
+
     for(unsigned char i : *pByteString){
         std::cout << i;
     }
